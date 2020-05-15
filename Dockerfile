@@ -13,10 +13,10 @@ RUN	apt install nginx -y
 RUN	apt install vim -y
 RUN	apt install php-mysql -y
 RUN	apt install wordpress -y
-RUN	apt intall zsh -y
+RUN	apt install zsh -y
 RUN	apt install git -y
 RUN	apt install curl -y
-RUN 	oh-my-zsh.sh -y
+RUN 	bash oh-my-zsh.sh -y
 RUN	tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz
 RUN	rm phpMyAdmin-5.0.2-all-languages.tar.gz
 RUN	mv phpMyAdmin-5.0.2-all-languages/ /usr/share/phpmyadmin
