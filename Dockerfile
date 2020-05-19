@@ -13,6 +13,7 @@ RUN		apt update && \
 		apt install nginx -y && \
 		apt install vim -y && \
 		apt install php-mysql -y && \
+		apt install php-fpm -y && \
 		apt install wordpress -y && \
 		apt install zsh -y && \
 		apt install git -y && \
