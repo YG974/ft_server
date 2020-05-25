@@ -9,6 +9,7 @@ COPY	srcs/phpMyAdmin-5.0.2-all-languages.tar.gz .
 COPY 	srcs/wp-config.php .
 COPY	srcs/config.inc.php .
 COPY	srcs/pokedex.com .
+COPY	srcs/entrypoint.sh .
 
 # Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP
 RUN		apt update && \
@@ -17,7 +18,7 @@ RUN		apt update && \
 		 wordpress \
 		 vim \
 		 zsh \
-		 php7.3-fpm php-mysql php-fpm php-mbstring php-cgi
+		 php php-mysql php-fpm php-mbstring php-cgi
 
 # Install phpMyAdmin form .tar file
 RUN		tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz && \
@@ -34,3 +35,6 @@ RUN		mv phpMyAdmin-5.0.2-all-languages/ /usr/share/phpmyadmin && \
 		ln -s /etc/nginx/sites-available/pokedex.com /etc/nginx/sites-enabled/pokedex.com
 
 EXPOSE	80 443
+
+#starting NGING MYSQL PHP
+ENTRYPOINT [".entrypoint.sh"]

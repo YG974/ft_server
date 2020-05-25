@@ -56,10 +56,10 @@ server {
 
 	# pass PHP scripts to FastCGI server
 	
-	location ~ \.php$ {
+	location ~ ^/index\.php(/|$) {
 		include snippets/fastcgi-php.conf;
 	
-	#	# With php-fpm (or other unix sockets):
+		# With php-fpm (or other unix sockets):
 		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 		# With php-cgi (or other tcp sockets):
 		fastcgi_pass 127.0.0.1:9000;
@@ -68,8 +68,8 @@ server {
 	# deny access to .htaccess files, if Apache's document root
 	# concurs with nginx's one
 	
-	location ~ /\.ht {
-		deny all;
+	#location ~ /\.ht {
+	#	deny all;
 	#}
 }
 
