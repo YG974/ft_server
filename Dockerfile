@@ -10,6 +10,7 @@ COPY 	srcs/wp-config.php .
 COPY	srcs/config.inc.php .
 COPY	srcs/pokedex.com .
 COPY	srcs/entrypoint.sh .
+COPY	srcs/index.html .
 
 # Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP
 RUN		apt update && \
@@ -33,6 +34,7 @@ RUN		mv phpMyAdmin-5.0.2-all-languages/ /usr/share/phpmyadmin && \
 		mv ./config.inc.php /usr/share/phpmyadmin && \
 		mv ./pokedex.com /etc/nginx/sites-available/ && \
 		mv ./wp-config.php /usr/share/wordpress/ && \
+		mv ./index.html /var/www/html/ && \
 		ln -s /etc/nginx/sites-available/pokedex.com /etc/nginx/sites-enabled/pokedex.com 
 
 # a mettre au propre apres
