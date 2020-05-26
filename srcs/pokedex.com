@@ -48,12 +48,6 @@ server {
 	index index.php index.html index.htm index.nginx-debian.html;
 
 
-	location / {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ =404;
-	}
-
 	# pass PHP scripts to FastCGI server
 	
 	location ~ ^/index\.php(/|$) {
@@ -63,6 +57,12 @@ server {
 		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 		# With php-cgi (or other tcp sockets):
 		fastcgi_pass 127.0.0.1:9000;
+	}
+
+	location / {
+		# First attempt to serve request as file, then
+		# as directory, then fall back to displaying a 404.
+		try_files $uri $uri/ =404;
 	}
 
 	# deny access to .htaccess files, if Apache's document root

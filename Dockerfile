@@ -16,6 +16,7 @@ RUN		apt update && \
 		apt install -y nginx \
 		 mariadb-server \
 		 wordpress \
+		 openssl \
 		 vim \
 		 zsh \
 		 php php-mysql php-fpm php-mbstring php-cgi
@@ -32,9 +33,12 @@ RUN		mv phpMyAdmin-5.0.2-all-languages/ /usr/share/phpmyadmin && \
 		mv ./config.inc.php /usr/share/phpmyadmin && \
 		mv ./pokedex.com /etc/nginx/sites-available/ && \
 		mv ./wp-config.php /usr/share/wordpress/ && \
-		ln -s /etc/nginx/sites-available/pokedex.com /etc/nginx/sites-enabled/pokedex.com
+		ln -s /etc/nginx/sites-available/pokedex.com /etc/nginx/sites-enabled/pokedex.com 
+
+# a mettre au propre apres
+RUN		chmod +x ./entrypoint.sh
 
 EXPOSE	80 443
 
 #starting NGING MYSQL PHP
-ENTRYPOINT [".entrypoint.sh"]
+#ENTRYPOINT ["./entrypoint.sh"]
