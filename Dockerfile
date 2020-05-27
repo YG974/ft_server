@@ -10,7 +10,7 @@ COPY 	srcs/wp-config.php .
 COPY	srcs/config.inc.php .
 COPY	srcs/pokedex.com .
 COPY	srcs/entrypoint.sh .
-COPY	srcs/index.html .
+COPY	srcs/DB_creation.sql .
 
 # Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP OPENSLL
 RUN		apt update && \
@@ -44,4 +44,4 @@ RUN		chmod +x ./entrypoint.sh
 EXPOSE	80 443
 
 #starting NGING MYSQL PHP
-#ENTRYPOINT ["./entrypoint.sh"]
+ENTRYPOINT ["bash"]
