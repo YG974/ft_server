@@ -35,7 +35,6 @@ RUN		mkdir -p /usr/share/monsite && \
 		mv /config.inc.php /usr/share/monsite/phpmyadmin && \
 		mv /pokedex.com /etc/nginx/sites-available/ && \
 		mv /wp-config.php /usr/share/monsite/wordpress/ && \
-		mv /index.html /usr/share/monsite/ && \
 		ln -s /etc/nginx/sites-available/pokedex.com /etc/nginx/sites-enabled/pokedex.com 
 
 # a mettre au propre apres
