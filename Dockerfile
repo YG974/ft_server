@@ -32,7 +32,7 @@ RUN		tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz && \
 RUN		mkdir -p /usr/share/monsite && \
 		mv phpMyAdmin-5.0.2-all-languages/ /usr/share/monsite/phpmyadmin && \
 		mv /usr/share/wordpress /usr/share/monsite/wordpress && \
-		mv /config.inc.php /usr/share/monsite/phpmyadmin && \
+		#mv /config.inc.php /usr/share/monsite/phpmyadmin/libraries && \
 		mv /pokedex.com /etc/nginx/sites-available/ && \
 		mv /wp-config.php /usr/share/monsite/wordpress/ && \
 		ln -s /etc/nginx/sites-available/pokedex.com /etc/nginx/sites-enabled/pokedex.com 
