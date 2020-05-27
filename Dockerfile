@@ -12,7 +12,7 @@ COPY	srcs/pokedex.com .
 COPY	srcs/entrypoint.sh .
 COPY	srcs/index.html .
 
-# Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP
+# Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP OPENSLL
 RUN		apt update && \
 		apt install -y nginx \
 		 mariadb-server \
@@ -26,15 +26,16 @@ RUN		apt update && \
 RUN		tar -xvf phpMyAdmin-5.0.2-all-languages.tar.gz && \
 		rm phpMyAdmin-5.0.2-all-languages.tar.gz && \
 		mkdir -p /var/lib/phpmyadmin/tmp && \
-		mkdir -p /etc/phpmyadmin/ && \
-		chown -R www-data:www-data /var/lib/phpmyadmin
+		mkdir -p /etc/phpmyadmin 
 
 # Moving settings 
-RUN		mv phpMyAdmin-5.0.2-all-languages/ /usr/share/phpmyadmin && \
-		mv ./config.inc.php /usr/share/phpmyadmin && \
-		mv ./pokedex.com /etc/nginx/sites-available/ && \
-		mv ./wp-config.php /usr/share/wordpress/ && \
-		mv ./index.html /var/www/html/ && \
+RUN		mkdir -p /usr/share/monsite && \
+		mv phpMyAdmin-5.0.2-all-languages/ /usr/share/monsite/phpmyadmin && \
+		mv /usr/share/wordpress /usr/share/monsite/wordpress && \
+		mv /config.inc.php /usr/share/monsite/phpmyadmin && \
+		mv /pokedex.com /etc/nginx/sites-available/ && \
+		mv /wp-config.php /usr/share/monsite/wordpress/ && \
+		mv /index.html /usr/share/monsite/ && \
 		ln -s /etc/nginx/sites-available/pokedex.com /etc/nginx/sites-enabled/pokedex.com 
 
 # a mettre au propre apres

@@ -19,7 +19,7 @@ server {
 	#include snippets/snakeoil.conf;
 
 	server_name 	localhost;
-	root 			/var/www/html;
+	root 			/usr/share/monsite;
 	index 			index.php index.html index.htm index.nginx-debian.html;
 
 	location / {
@@ -27,8 +27,6 @@ server {
 	}
 
 	location /wordpress {
-		root /var/lib/wordpress/wp-content;
-		index index.php index.html index.htm;
 		include snippets/fastcgi-php.conf;
 		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 		#try_files $uri $uri/ =404;
@@ -36,8 +34,6 @@ server {
 	}
 
 	location /phpmyadmin {
-		root usr/share/phpmyadmin;
-		index index.php index.html index.htm;
 		include snippets/fastcgi-php.conf;
 		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
 		#try_files $uri $uri/ =404;
