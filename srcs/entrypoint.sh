@@ -5,4 +5,5 @@ mariadb < dbinit.sql
 
 service php7.3-fpm start
 
-nginx -g 'daemon off;'
+service nginx start
+#nginx -g 'daemon off;'

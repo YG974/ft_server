@@ -25,8 +25,7 @@ RUN		apt update && apt install -y \
 		 php-cgi
 
 # Copy settings 
-COPY	srcs/phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz \
-	 	srcs/wp-config.php \
+COPY	srcs/wp-config.php \
 		srcs/config.inc.php \
 		srcs/pokedex.com.conf \
 		srcs/entrypoint.sh \
@@ -56,4 +55,4 @@ RUN		chmod +x ./entrypoint.sh
 EXPOSE	80 443
 
 #starting NGING MYSQL PHP
-ENTRYPOINT ["sh", "-c", "./entrypoint.sh"]
+#ENTRYPOINT ["sh", "-c", "./entrypoint.sh"]
