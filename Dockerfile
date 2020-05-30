@@ -25,7 +25,7 @@ RUN		apt update && apt install -y \
 		 php-cgi
 
 # Copy settings 
-COPY	srcs/phpMyAdmin-4.9.2-all-languages.tar.gz \
+COPY	srcs/phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz \
 	 	srcs/wp-config.php \
 		srcs/config.inc.php \
 		srcs/pokedex.com.conf \
