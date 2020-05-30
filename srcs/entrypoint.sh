@@ -1,7 +1,8 @@
 #!/bin/bash
 
-service php7.3-fpm start
 service mysql start
-service nginx start
-mariadb < /DB_creation.sql
-service --status-all
+mariadb < dbinit.sql
+
+service php7.3-fpm start
+
+nginx -g 'daemon off;'
