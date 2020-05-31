@@ -34,9 +34,15 @@ COPY	srcs/wp-config.php \
 		./
 
 # Download and install phpMyAdmin
-ADD https://files.phpmyadmin.net/phpMyAdmin/$PHPMYADMIN_VERSION/phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz .
+ADD 	https://files.phpmyadmin.net/phpMyAdmin/$PHPMYADMIN_VERSION/phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz .
 
-RUN tar -xvf phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz
+RUN 	tar -xvf phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz
+
+# Download and install mkcert, SSL certifier
+ADD 	https://github.com/FiloSottile/mkcert/releases/download/v1.3.0/mkcert-v1.3.0-linux-amd64 .
+RUN 	mv mkcert-v1.3.0-linux-amd64 mkcert #&& \
+#		chmod +x mkcert && \
+
 
 # Moving settings 
 RUN		mkdir -p /var/www/monsite && \
