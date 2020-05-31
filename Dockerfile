@@ -40,9 +40,10 @@ RUN 	tar -xvf phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz
 
 # Download and install mkcert, SSL certifier
 ADD 	https://github.com/FiloSottile/mkcert/releases/download/v1.3.0/mkcert-v1.3.0-linux-amd64 .
-RUN 	mv mkcert-v1.3.0-linux-amd64 mkcert #&& \
-#		chmod +x mkcert && \
-
+RUN 	mv mkcert-v1.3.0-linux-amd64 mkcert && \
+		chmod +x mkcert && \
+		mv mkcert /usr/local/bin && \
+		mkcert -install
 
 # Moving settings 
 RUN		mkdir -p /var/www/monsite && \
@@ -54,6 +55,12 @@ RUN		mkdir -p /var/www/monsite && \
 		mv .vimrc ~/.
 
 RUN		ln -s /etc/nginx/sites-available/pokedex.com.conf /etc/nginx/sites-enabled/
+
+# Setting SSL certificates
+RUN 	mkdir -p /etc/nginx/keys/localhost && \
+		mkcert localhost && \
+		mv localhost.pem /etc/nginx/keys/localhost/. && \
+		mv localhost-key.pem /etc/nginx/keys/localhost/. 
 
 # a mettre au propre apres
 RUN		chmod +x ./entrypoint.sh
