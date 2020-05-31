@@ -30,6 +30,7 @@ COPY	srcs/wp-config.php \
 		srcs/entrypoint.sh \
 		srcs/dbinit.sql \
 		srcs/.vimrc \
+		srcs/switch_autoindex.sh \
 		./
 
 # Download and install phpMyAdmin
@@ -62,7 +63,9 @@ RUN 	mkdir -p /etc/nginx/keys/localhost && \
 		mv localhost-key.pem /etc/nginx/keys/localhost/. 
 
 # a mettre au propre apres
-RUN		chmod +x ./entrypoint.sh
+RUN		chmod +x ./entrypoint.sh && \
+		chmod +r /etc/nginx/sites-available/localhost.conf && \
+		chmod +x ./switch_autoindex.sh
 
 EXPOSE	80 443
 
