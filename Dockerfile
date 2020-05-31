@@ -9,12 +9,11 @@ LABEL MAINTAINER="ygeslin <ygeslin@student.42.fr>"
 
 WORKDIR	/src
 
-# Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP OPENSLL TMUX
+# Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP TMUX
 RUN		apt update && apt install -y \
 		 nginx \
 		 mariadb-server \
 		 wordpress \
-		 openssl \
 		 vim \
 		 zsh \
 		 tmux \
@@ -27,7 +26,7 @@ RUN		apt update && apt install -y \
 # Copy settings 
 COPY	srcs/wp-config.php \
 		srcs/config.inc.php \
-		srcs/pokedex.com.conf \
+		srcs/localhost.conf \
 		srcs/entrypoint.sh \
 		srcs/dbinit.sql \
 		srcs/.vimrc \
@@ -50,11 +49,11 @@ RUN		mkdir -p /var/www/monsite && \
 		mv phpMyAdmin-$PHPMYADMIN_VERSION-all-languages/ /var/www/monsite/phpmyadmin && \
 		mv /usr/share/wordpress /var/www/monsite/wordpress && \
 		mv config.inc.php /var/www/monsite/phpmyadmin && \
-		mv pokedex.com.conf /etc/nginx/sites-available/ && \
+		mv localhost.conf /etc/nginx/sites-available/ && \
 		mv wp-config.php /var/www/monsite/wordpress/ && \
 		mv .vimrc ~/.
 
-RUN		ln -s /etc/nginx/sites-available/pokedex.com.conf /etc/nginx/sites-enabled/
+RUN		ln -s /etc/nginx/sites-available/localhost.conf /etc/nginx/sites-enabled/
 
 # Setting SSL certificates
 RUN 	mkdir -p /etc/nginx/keys/localhost && \
@@ -68,4 +67,4 @@ RUN		chmod +x ./entrypoint.sh
 EXPOSE	80 443
 
 #starting NGING MYSQL PHP
-#ENTRYPOINT ["sh", "-c", "./entrypoint.sh"]
+ENTRYPOINT ["sh", "-c", "./entrypoint.sh"]
