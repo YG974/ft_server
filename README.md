@@ -12,7 +12,7 @@ It uses __docker__ technology to install a complete web server. This server will
 Make sure Docker Desktop is running and you are in the ft_server directory.  
 * To build the docker image :  
 Run `docker build -t ft_server .`
-* To run the docker image, and access to the services :  
+* To run the docker image, and access services :  
 Run `docker run -p 80:80 -p 443:443 -d ft_server .`  
   
 The services are now running.  
