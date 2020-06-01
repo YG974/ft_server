@@ -1,6 +1,3 @@
-# build : docker build -t ygeslin/ftserver:latest .
-# run : docker run -d -p 80:80 -p 443:443 ygeslin/ftserver:latest
-
 FROM debian:buster
 
 ARG PHPMYADMIN_VERSION=5.0.2
@@ -9,27 +6,24 @@ LABEL MAINTAINER="ygeslin <ygeslin@student.42.fr>"
 
 WORKDIR	/src
 
-# Apt update and install NGINX MARIADB WORDPRESS VIM ZSH PHP TMUX
+# Apt update and install NGINX MARIADB WORDPRESS PHP VIM 
 RUN		apt update && apt install -y \
 		 nginx \
 		 mariadb-server \
 		 wordpress \
 		 vim \
-		 zsh \
-		 tmux \
 		 php \
 		 php-mysql \
 		 php-fpm \
 		 php-mbstring \
 		 php-cgi
 
-# Copy settings 
+# Copy sources 
 COPY	srcs/wp-config.php \
 		srcs/config.inc.php \
 		srcs/localhost.conf \
 		srcs/entrypoint.sh \
 		srcs/dbinit.sql \
-		srcs/.vimrc \
 		srcs/switch_autoindex.sh \
 		./
 
@@ -38,7 +32,7 @@ ADD 	https://files.phpmyadmin.net/phpMyAdmin/$PHPMYADMIN_VERSION/phpMyAdmin-$PHP
 
 RUN 	tar -xvf phpMyAdmin-$PHPMYADMIN_VERSION-all-languages.tar.gz
 
-# Download and install mkcert, SSL certifier
+# Download and install mkcert(SSL certifier)
 ADD 	https://github.com/FiloSottile/mkcert/releases/download/v1.3.0/mkcert-v1.3.0-linux-amd64 .
 RUN 	mv mkcert-v1.3.0-linux-amd64 mkcert && \
 		chmod +x mkcert && \
@@ -51,8 +45,7 @@ RUN		mkdir -p /var/www/monsite && \
 		mv /usr/share/wordpress /var/www/monsite/wordpress && \
 		mv config.inc.php /var/www/monsite/phpmyadmin && \
 		mv localhost.conf /etc/nginx/sites-available/ && \
-		mv wp-config.php /var/www/monsite/wordpress/ && \
-		mv .vimrc ~/.
+		mv wp-config.php /var/www/monsite/wordpress/
 
 RUN		ln -s /etc/nginx/sites-available/localhost.conf /etc/nginx/sites-enabled/
 
@@ -62,9 +55,8 @@ RUN 	mkdir -p /etc/nginx/keys/localhost && \
 		mv localhost.pem /etc/nginx/keys/localhost/. && \
 		mv localhost-key.pem /etc/nginx/keys/localhost/. 
 
-# a mettre au propre apres
-RUN		chmod +x ./entrypoint.sh && \
-		chmod +r /etc/nginx/sites-available/localhost.conf && \
+# Adding right to scripts
+RUN		chmod +x ./entrypoint.sh && \  
 		chmod +x ./switch_autoindex.sh
 
 EXPOSE	80 443
